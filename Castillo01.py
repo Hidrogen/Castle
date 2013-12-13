@@ -21,13 +21,13 @@ class Sprite:
         screen.blit(self.s2,(300,250))
         reloj.tick(30)
         pygame.display.flip()
-        
+
         
 import pygame
 from pygame.locals import *
 reloj=pygame.time.Clock()
+width=800
 height=600
-width=500
 screen = pygame.display.set_mode((width, height))
 pygame.key.set_repeat(1, 2);
 mapa=pygame.image.load("./Sprites/Mapa/Laberinto_1.png")
