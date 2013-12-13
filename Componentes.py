@@ -1,9 +1,10 @@
 class Entity:
     def __init__(self, sprites, hp, speed, kind, bag):
-        self.i0 = sprites[0]
-        self.i1 = sprites[1]
-        self.i2 = sprites[2]
-        self.i3 = sprites[3] #faltaba una serie de sprites, (arriba, abajo, derecha izq, son 4)
+        #self.i0 = sprites[0]
+        #self.i1 = sprites[1]
+        #self.i2 = sprites[2]
+        #self.i3 = sprites[3] #faltaba una serie de sprites, (arriba, abajo, derecha izq, son 4)
+        self.spritesheet_url=sprites
         self.health = hp
         self.speed = speed
 ## parametro kind es un numero entero 0,1 o 2.
@@ -28,10 +29,10 @@ class Entity:
 
 class Sprite(Entity):
 
-    def __init__(self, spritesheet_url, w, h):
+    def __init__(self, w, h):
       self.images = []
       self.images.append
-      spritesheet = pygame.image.load(spritesheet_url).convert_alpha()
+      spritesheet = pygame.image.load(self.spritesheet_url).convert_alpha()
       spritesheet_width, spritesheet_height = spritesheet.get_size()
       print(range(int(spritesheet_height/h)-1))
       print(range(int(spritesheet_width/w)-1))
