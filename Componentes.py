@@ -27,13 +27,23 @@ class Entity:
 
 
 class Sprite(Entity):
-    self.d=[pygame.image.load(self.i0[0]), pygame.image.load(self.i0[1]), pygame.image.load(self.i0[2])]
-    
-    self.l=[pygame.image.load(self.i1[0]), pygame.image.load(self.i1[1]), pygame.image.load(self.i1[2])]
-    
-    self.r=[pygame.image.load(self.i2[0]), pygame.image.load(self.i2[1]), pygame.image.load(self.i2[2])]
- 
-    self.u=[pygame.image.load(self.i3[0]), pygame.image.load(self.i3[1]), pygame.image.load(self.i3[2])]
+
+    def __init__(self, spritesheet_url, w, h):
+      self.images = []
+      self.images.append
+      spritesheet = pygame.image.load(spritesheet_url).convert_alpha()
+      spritesheet_width, spritesheet_height = spritesheet.get_size()
+      print(range(int(spritesheet_height/h)-1))
+      print(range(int(spritesheet_width/w)-1))
+      for j in range(int(spritesheet_height/h)):
+        self.images.append([])
+        for i in range(int(spritesheet_width/w)):
+          self.images[j].append(spritesheet.subsurface((i*w,h*j,w,h)))
+
+      self.d=[self.images[0][0], self.images[0][1], self.images[0][2]]
+      self.l=[self.images[1][0], self.images[1][1], self.images[1][2]]
+      self.r=[self.images[2][0], self.images[2][1], self.images[2][2]]
+      self.u=[self.images[3][0], self.images[3][1], self.images[3][2]]
     
     def animar(self, orientation): #donde orientation es : u, d, l, r
         #Reconocer la orientación
