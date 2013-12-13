@@ -3,6 +3,7 @@ class Entity:
         self.i0 = sprites[0]
         self.i1 = sprites[1]
         self.i2 = sprites[2]
+        self.i3 = sprites[3] #faltaba una serie de sprites, (arriba, abajo, derecha izq, son 4)
         self.health = hp
         self.speed = speed
 ## parametro kind es un numero entero 0,1 o 2.
@@ -26,24 +27,38 @@ class Entity:
 
 
 class Sprite(Entity):
-    #hay que cambiar estos self por los definidos en la entidad.
-    def cargar(self):
-        self.s1=pygame.image.load(self.a)
-        self.s2=pygame.image.load(self.b)
-        self.s3=pygame.image.load(self.c)        
-    def animar(self):
-        screen.blit(self.s1,(300,250))
-        pygame.display.flip()
-        reloj.tick(30)
-        screen.blit(self.s2,(300,250))
-        reloj.tick(30)
-        pygame.display.flip()
-        screen.blit(self.s3,(300,250))
-        reloj.tick(30)
-        pygame.display.flip()
-        screen.blit(self.s2,(300,250))
-        reloj.tick(30)
-        pygame.display.flip()
+    self.d=[pygame.image.load(self.i0[0]), pygame.image.load(self.i0[1]), pygame.image.load(self.i0[2])]
+    
+    self.l=[pygame.image.load(self.i1[0]), pygame.image.load(self.i1[1]), pygame.image.load(self.i1[2])]
+    
+    self.r=[pygame.image.load(self.i2[0]), pygame.image.load(self.i2[1]), pygame.image.load(self.i2[2])]
+ 
+    self.u=[pygame.image.load(self.i3[0]), pygame.image.load(self.i3[1]), pygame.image.load(self.i3[2])]
+    
+    def animar(self, orientation): #donde orientation es : u, d, l, r
+        #Reconocer la orientación
+        if orientation=="u":
+            lista=self.u
+        elif orientation=="d":
+            lista=self.d
+        elif orientation=="r":
+            lista=self.r
+        elif orientation=="l":
+            lista=self.l
+        #reemplace la iteracion por un for.   
+        for i in range(3):    
+            screen.blit(lista[i],(300,250))
+            pygame.display.flip()
+            reloj.tick(30)
+        #screen.blit(self.s2,(300,250))
+        #reloj.tick(30)
+        #pygame.display.flip()
+        #screen.blit(self.s3,(300,250))
+        #reloj.tick(30)
+        #pygame.display.flip()
+        #screen.blit(self.s2,(300,250))
+        #reloj.tick(30)
+        #pygame.display.flip()
 
 sprites_human= []#Sublistas con los directorios de los spritesb = Sprite()
 ##class Health(Player):
