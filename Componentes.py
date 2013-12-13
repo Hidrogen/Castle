@@ -1,3 +1,4 @@
+import pygame
 class Entity:
     def __init__(self, sprites, hp, speed, kind, bag):
         #self.i0 = sprites[0]
@@ -29,7 +30,8 @@ class Entity:
 
 class Sprite(Entity):
 
-    def __init__(self, w, h):
+    def __init__(self, w, h, sprites, hp, speed, kind, bag):
+      Entity.__init__(self, sprites, hp, speed, kind, bag)
       self.images = []
       self.images.append
       spritesheet = pygame.image.load(self.spritesheet_url).convert_alpha()
@@ -45,8 +47,12 @@ class Sprite(Entity):
       self.l=[self.images[1][0], self.images[1][1], self.images[1][2]]
       self.r=[self.images[2][0], self.images[2][1], self.images[2][2]]
       self.u=[self.images[3][0], self.images[3][1], self.images[3][2]]
+
+    def initial_position(self,screen,x,y):
+        screen.blit(self.d[1],(x,y))
+        pygame.display.flip()
     
-    def animar(self, orientation): #donde orientation es : u, d, l, r
+    def animar(self,screen, orientation): #donde orientation es : u, d, l, r
         #Reconocer la orientación
         if orientation=="u":
             lista=self.u
@@ -60,7 +66,7 @@ class Sprite(Entity):
         for i in range(3):    
             screen.blit(lista[i],(300,250))
             pygame.display.flip()
-            reloj.tick(30)
+            pygame.time.Clock().tick(30)
         #screen.blit(self.s2,(300,250))
         #reloj.tick(30)
         #pygame.display.flip()
@@ -95,21 +101,19 @@ class Type(Entity):
             return 2
 ## la idea de la clase Team es evaluar cuando colisionen son ambos 0, ambos 1 o distintos.
 
-class Inventory(Entity):
+#class Inventory(Entity):
     #existe una lista cuyos elementos se refieren a las llaves, en esta clase se indica cuales tiene el jugador.
-    def get_item(self):
+    #def get_item(self):
+        
 #en caso de coalision con un item agregarlo al inventario
         #self.bag.append(entidad llave)
         
-in_game_items = []#Aca se refieren como elementos las entidades llave.
+#in_game_items = []#Aca se refieren como elementos las entidades llave.
 
-class Coalition(Entity):
+#class Coalition(Entity):
     #realmente no se como hacer esto.
     #evaluar los limites del sprite y sumarlos propiamente a la posicion y ver si se toca con algo?
     #tiene que haber un metodo que no demande tantos recursos y sea mas facil.
 
-class AI(Entity):
-## este dejarlo para despues.    
-
-            
-
+#class AI(Entity):
+## este dejarlo para despues. 
