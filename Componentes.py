@@ -56,29 +56,15 @@ class Human():
 #----------------------       
 #Systems
 #----------------------
-        
-class Sprite():
-
-    def __init__(self, w, h, sprites, hp, speed, kind, bag):
-      Entity.__init__(self, sprites, hp, speed, kind, bag)
-      self.images = []
-      self.images.append
-      spritesheet = pygame.image.load(self.spritesheet_url).convert_alpha()
-      spritesheet_width, spritesheet_height = spritesheet.get_size()
-      print(range(int(spritesheet_height/h)-1))
-      print(range(int(spritesheet_width/w)-1))
-      for j in range(int(spritesheet_height/h)):
-        self.images.append([])
-        for i in range(int(spritesheet_width/w)):
-          self.images[j].append(spritesheet.subsurface((i*w,h*j,w,h)))
 
 class Input_System():
     def update(self):
         ev = pygame.event.get()
         for event in ev:
             if event.type == pygame.MOUSEBUTTONUP:
-                Human.velocity.x = 0;
-                Human.velocity.y = 1;
+                for entity in entities:
+                    entity.velocity.x = 0
+                    entity.velocity.y = 1
 
     def sprint(self, new_velX, new_velY):
             Human.velocity.x = new_velX
@@ -92,7 +78,7 @@ class Physics_System():
             entity.position.y = entity.position.y + entity.velocity.y
             
 class Render_System():
-    def update(self):
+    def update(self, screen):
         for entity in entities:
             screen.blit(entity.sprites.images[0][0], (entity.position.x, entity.position.y))
 
@@ -126,6 +112,7 @@ class Render_System():
         #pygame.display.flip()
             
 #----------------------       
-#End
+#Other
 #----------------------
-
+#Al parecer las listas deben existir como vacias en este archivo. Me refiero a las listas como entity       
+entities = []
