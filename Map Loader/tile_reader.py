@@ -1,26 +1,35 @@
 import pygame
 import pygame.locals
 
-def load_tile_table(filename, width, height):
-    image = pygame.image.load(filename).convert_alpha()
-    image_width, image_height = image.get_size()
+
+def load_tiles(filename, w, h):
     tile_table = []
-    for tile_x in range(0, int(image_width/width)):
-        line = []
-        tile_table.append(line)
-        for tile_y in range(0, int(image_height/height)):
-            rect = (tile_x*width, tile_y*height, width, height)
-            line.append(image.subsurface(rect))
+    tile_table.append
+    tilesheet = pygame.image.load(filename).convert_alpha()
+    tilesheet_width, tilesheet_height = tilesheet.get_size()
+    tile_table = []
+    for j in range(int(tilesheet_width/w)):
+        tile_table.append([])
+        for i in range(int(tilesheet_height/h)):
+            tile_table[j].append(tilesheet.subsurface((i*w,h*j,w,h)))
     return tile_table
+def load_csv(filename):
+    layer = open(filename)
+    for line in layer:
+        line = line.split(",")
+        for element in line:
+            #if "0":
+                #blit la tile correspondiente a 0. (vacio en este caso)
 
 if __name__=='__main__':
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
     screen.fill((250, 250, 250))
-    table = load_tile_table("Castle Tiles.png", 32, 32)
-    for x, row in enumerate(table):
-        for y, tile in enumerate(row):
-            screen.blit(tile, (x*32, y*24))
+    load_csv("mapCSV_Group1_Ground.csv")
+    table = load_tiles("Castle Tiles.png", 32, 32)
+    for y, row in enumerate(table):
+        for x, tile in enumerate(row):
+            screen.blit(tile, (x*32, y*32))
     pygame.display.flip()
     while pygame.event.wait().type != pygame.locals.QUIT:
         pass
