@@ -161,7 +161,33 @@ class Render_System():
                 self.id = "l"
         #reemplace la iteracion por un for.   
         pygame.time.Clock().tick(30)
-            
+
+#----------------------       
+#Map
+#----------------------
+
+class Map():
+    def load_tiles(self, filename, w, h):
+        self.tile_list = []
+        tilesheet = pygame.image.load(filename).convert_alpha()
+        tilesheet_width, tilesheet_height = tilesheet.get_size()
+        for j in range(int(tilesheet_width/w)):
+            for i in range(int(tilesheet_height/h)):
+                self.tile_list.append(tilesheet.subsurface((i*w,h*j,w,h)))
+
+    def load_csv(self, filename, screen):
+        layer = open(filename)
+        column = 0
+        row = 0
+        for line in layer:
+            line = line.split(",")
+            for element in line:
+                screen.blit(self.tile_list[int(element)], (row*32, column*32))
+                row += 1
+                if row >= 32:
+                    row = 0
+            column += 1
+
 #----------------------       
 #Other
 #----------------------
